@@ -247,9 +247,13 @@ function fillWith(table) {
       var e = document.getElementById('c' + j + i).children[0];
       var v = e.value;
 
-      if (v == "" && table.cells[i][j].isKnown()) {
-        var nv = table.cells[i][j].getValue();
-        e.value = nv;
+      if (v == "") {
+        var cell = table.cells[i][j];
+        if (cell.isKnown()) {
+          e.value = cell.getValue();
+        } else {
+          e.title = cell.values.join(' ');
+        }
       }
     }
   }
